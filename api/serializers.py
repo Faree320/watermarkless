@@ -1,0 +1,21 @@
+from TikTokApi import TikTokApi
+
+
+def tiktok_api():
+    cookies = {
+        "cookie": "passport_csrf_token=24d3cf05dcfd2eb4eb5e36bd0a1916f1; passport_csrf_token_default=24d3cf05dcfd2eb4eb5e36bd0a1916f1; passport_auth_status=497c66858d8e7c57518a5b1083bb35b7%2C373931e3ade6dda24eeea7d0aaa7401d; passport_auth_status_ss=497c66858d8e7c57518a5b1083bb35b7%2C373931e3ade6dda24eeea7d0aaa7401d; sid_guard=43431ad89f49cf40457e7f2ab1762493%7C1660712706%7C5183999%7CSun%2C+16-Oct-2022+05%3A05%3A05+GMT; uid_tt=ab9f72cdc085a6aef65541be31cb24cf9a2d732d965a3f2a032637f4a997eaa4; uid_tt_ss=ab9f72cdc085a6aef65541be31cb24cf9a2d732d965a3f2a032637f4a997eaa4; sid_tt=43431ad89f49cf40457e7f2ab1762493; sessionid=43431ad89f49cf40457e7f2ab1762493; sessionid_ss=43431ad89f49cf40457e7f2ab1762493; sid_ucp_v1=1.0.0-KDMzMmFhNGQ0OTM4NTc2MmQ1OTgyNzUxM2QyNGIxM2M1OWYxNzhiNGMKHwiCiLS0jpWg2GAQgu7xlwYYswsgDDDWpsKFBjgIQBIQAxoGbWFsaXZhIiA0MzQzMWFkODlmNDljZjQwNDU3ZTdmMmFiMTc2MjQ5Mw; ssid_ucp_v1=1.0.0-KDMzMmFhNGQ0OTM4NTc2MmQ1OTgyNzUxM2QyNGIxM2M1OWYxNzhiNGMKHwiCiLS0jpWg2GAQgu7xlwYYswsgDDDWpsKFBjgIQBIQAxoGbWFsaXZhIiA0MzQzMWFkODlmNDljZjQwNDU3ZTdmMmFiMTc2MjQ5Mw; store-idc=useast2a; store-country-code=pk; tt-target-idc=alisg; __tea_cache_tokens_1988={%22user_unique_id%22:%227130525750311257602%22%2C%22timestamp%22:1660714777509%2C%22_type_%22:%22default%22}; store-country-code-src=uid; MONITOR_WEB_ID=7a9e89be-892e-4384-b0f0-bc3191a4bae0; tt_csrf_token=lZVGFB5E-TF1yZf56I4NQ6RyDsqIM9ol7Y9w; bm_sz=3C1D2D0E624A9819B508D3260B2EED97~YAAQlcBBOped//eCAQAAUQsBEhHZ+jifD29vln2Ja2TnnD0gsHZr02O3POLepI8M+xSpYbp9V8K+N0qIxPiNJ6ImUbmUhHnb30SOIYEHujaaNFADpMIUIZThQrgA56WkwKFIceqvLs7I10agCwAxKjA39oDlh7KSPdT/QrXTUBvBNEdBnVs1NYFxDdJv2/dGSYRWB4nqpSmUUbbECJsrsch4k3oVgrchFIIDWyGDQb98GmOJPn22m0NPDj4vHy/jPR0g45B44IinrHGf7W48/8skfpCmb1ud66/NcVnTO5+7LAdzZPtaLTV9xtqsUAxvOFL5XxcVBhD5d2Q=~4342338~3425072; cmpl_token=AgQQAPO4F-RMpbCObg9uv907-JUuV6aLP4AzYMVR-w; ak_bmsc=EAA270FC1F95908ADD5B8A65FD2F45CC~000000000000000000000000000000~YAAQhcBBOi8TA/iCAQAAUvdVEhFZ39ENXbtXkxfwsUs7f+lZlimWC+rpUO96us2CxtfvKR1x1MENZ5oW1Blxe5Wycy1AWKYhyFq46S8Lpcw2sCTOpfAnwnCcytdUKkgcmBKDkGhO89kdShIGApYbXiNIge5XR1rfNgIgng0C+qho1O9b0k46+OOgW+4u6iFhgIAKx+lCe3OgbjqN9d2g2Ut01rbVxnd2g+i+cHZzY6wB7sgYtUbRM4+TdDKH45qzIxBSr/0535WiP3F1OeJUy/+K9o7/a8ex2agXUFkuo7ekJeI5pAYYmuhIPii/rv4dI/+SsgvM+/vf7/lUb4V9gKbQdFT/pcV4c5Di37QYT+T9bhdYeijYPUomutsje2n6A0O5Q+mjGnbsNw==; passport_fe_beating_status=true; ttwid=1%7C5aHP662LIIjOmzFdf7FK29RhSiBxMhgny-m41kDwKi0%7C1662460007%7Cfc31aaddd23097ba5d82642c5365f184c0d90fa59b2d8ab670744734c401b5ca; bm_sv=FE5B9FC4045F88620138F08684D095CB~YAAQhcBBOqoTA/iCAQAARZtWEhGbBiwd0qSxB9SVEc4dCDS19TXAqJlo7M1VNuiVoo2yi/FIzI6fhF3A3Ky1dRfMul9pZpygfWHyYLZc7w8/KBIzhy3XgPhIak4U/2AZxWO+5IQhv3myvE6ejCSlwCwEOc7oPp3kBac5yh1BA/VT3gaC1zg9AkXrcXt7CC+NnXlRK6jjorvhsTx5qSVIBu2xkuelathfMGWBpIElzzocEuh5XJwi9a++UQCZqHBX~1; odin_tt=fea3238988e9e38b36eb1ec8895cdbb06c8fb4a35ff161ce2378258d8f55713ca987dd9040a4600e214e98315dcee081c4ebb058424de22e09bc5bdfb4050cef; msToken=4YEPKaxeeMnbESHdoacRussLh31bGVXtHpMPdz8ngHXsuWGdoMmzz0MK36Y3QbQYX3fPVZhIAEUiE6AaDtvWOak8PdukG2vK1Re8mhLJCiWdKxTjDDQQgc4OTJkgTUjWMv2CMZS-FO1p42IlGg==; msToken=28Eo6Ynwy6_4oF_ea55mqCnH3oZl0iQjkb5Ex1pV5Tij8Z-VDI7FFhahPBuu-zo2ozzAIzSgwILBObDUnBGTI-qUc-45y1oigtXPLx-9Ghk34pmm8iyUQHw378rN5XGVBlWQfsIuRFaQH3T77g==; _abck=9E413CE6509575293B9D2CD825C1DAA7~-1~YAAQjsBBOgDI+wGDAQAAkahiEgjvCH/S8lriNVwVatDn6mnV6pG4k7VMXdd0iYeOcmP4lZUJZeDU23Nr+3eJPi9hmVIfvwkpBDGJzPALTXAn3BYiEh8Me9rr12Md6sIypYBQ4Kf2z3JkFIimvtGOcjsEKaOOGfHeJhMoo2BUlSLcQmkIzeKtatZDifBFHyIX1GnuLdPvi0AZsxr2g2msSAeG/azIRi2Fd7LUWwBOtRRo5WO7nOIBzLfqz8Ui4PLBGnUQkvSkfQQD0RqykoevvBLpmxi0lyHAaXVgkGUZbfFzKmBa+eDrhl3WCn8K+A3mvzu5kQnvYig2iFczkuX7vuCW9b7fM+9Qxavp/ieu7xU=~-1~-1~-1"}
+
+    def get_cookies(**kwargs):
+        return cookies
+
+    api = TikTokApi()
+
+    api._get_cookies = get_cookies  # This fixes issues the api was having
+    # print(api.user(user_id="mysterious_girrrllll"))
+    # user = api.user(username='mysterious_girrrllll')
+    videolink = []
+    for trending_video in api.trending.videos():
+        # print(video.info())
+        videolink.append(trending_video.as_dict["video"]["downloadAddr"])
+    print(videolink)
+    return videolink
