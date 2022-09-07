@@ -72,7 +72,7 @@ def video_list(request):
     if cookie:
         def testing(params=''):
             links = []
-            cookies = {"passport_csrf_token": cookie}
+            cookies = {"cookie": cookie}
             print("I am If")
             url = "https://www.tiktok.com/api/recommend/item_list/?aid=1988&app_language=en&app_name=tiktok_web&battery_info=1&browser_language=en-US&browser_name=Mozilla&browser_online=true&browser_platform=Win32&browser_version=5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F105.0.0.0%20Safari%2F537.36&channel=tiktok_web&cookie_enabled=true&count=30&device_id=7130525750311257602&device_platform=web_pc&focus_state=false&from_page=fyp&history_len=4&is_fullscreen=false&is_page_visible=true&os=windows&priority_region=PK&referer=&region=PK&screen_height=720&screen_width=1280&tz_name=Asia%2FKarachi&webcast_language=en&msToken=_LK9VtxPkV6Qd87L40rTIjqJOderfXQbo1czPjNhWmkV2dsIYomyX79TIOHw7P0fv2eQWJi9V6CHrQjefGJHB-GWEcwjJy1gL3T37lJiqwcf7iqf4DVPVFIbSRBS7p_0sWgGxBp1J20kd2Pefg==&X-Bogus=DFSzswVLjyxANydASQM-jcYklTXR&_signature=_02B4Z6wo00001GYDPAwAAIDBuHVkqcP0F0xmAziAAHqf4f"
             res = requests.get(url, cookies=cookies)
