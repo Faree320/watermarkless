@@ -54,10 +54,9 @@ def get_routes(request):
                 # secretID = data["aweme_detail"]["video"]["play_addr"]["uri"]
                 watermarklessURLs = data["aweme_detail"]["video"]["play_addr"]["url_list"]
                 return watermarklessURLs
+            data = {"status": "true", 'data': final_result()}
+            routes = data
 
-            routes = [
-                {'URLS': final_result()},
-            ]
             return JsonResponse(routes, safe=False)
         except KeyError:
             return JsonResponse("We didn't find a required result... Please try again", safe=False)
