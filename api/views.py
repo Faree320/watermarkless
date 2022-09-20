@@ -1,17 +1,11 @@
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-import json
-import asyncio
-# from TikTokApi import TikTokApi
-import math
-from .serializers import tiktok_api
 import random
-import time, datetime
-import urllib
+import time
 import re
-
 import requests
+import json
 
 
 def get_routes(request):
@@ -24,37 +18,21 @@ def get_routes(request):
             print(video.group())
             print("test")
             video_id = video.group()
+            openudid = ''.join(random.sample('0123456789abcdef', 16))
+            ts = int(time.time())
+            uuid = ''.join(random.sample('01234567890123456', 16))
+            tiktok_api_headers = {
+                'user-agent': 'com.ss.android.ugc.trill/2613 (Linux; U; Android 10; en_US; Pixel 4; Build/QQ3A.200805.001; Cronet/58.0.2991.0)'
+            }
+            tiktok_api_link = 'https://api-h2.tiktokv.com/aweme/v1/feed/?aweme_id={}&version_name=26.1.3&version_code=2613&build_number=26.1.3&manifest_version_code=2613&update_version_code=2613&openudid={}&uuid={}&_rticket={}&ts={}&device_brand=Google&device_type=Pixel%204&device_platform=android&resolution=1080*1920&dpi=420&os_version=10&os_api=29&carrier_region=US&sys_region=US%C2%AEion=US&app_name=trill&app_language=en&language=en&timezone_name=America/New_York&timezone_offset=-14400&channel=googleplay&ac=wifi&mcc_mnc=310260&is_my_cn=0&aid=1180&ssmix=a&as=a1qwert123&cp=cbfhckdckkde1'.format(
+                video_id, openudid, uuid, ts * 1000, ts)
 
-            def generate_device_id():
-                a = (''.join(str(random.randint(0, 9)) for _ in range(19)))
-                return a
+            print(tiktok_api_link)
+            response = requests.get(url=tiktok_api_link, headers=tiktok_api_headers).text
+            result = json.loads(response)
+            nwm_video_url = result["aweme_list"][0]["video"]["play_addr"]["url_list"][0]
 
-            def generate_base62(length):
-                base62 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-                b = (''.join(str(random.choice(base62)) for _ in range(length)))
-                return b
-
-            def request_aweme(path):
-                headers = {'User-Agent': 'okhttp', }
-                time_now = int(time.time() * 1000)
-                request_url = 'https://api-t2.tiktokv.com' + path + '&region=US' + '&ts=' + str(
-                    math.floor(
-                        time_now / 1000)) + '&timezone_name=Etc%2FGMT' + '&device_type=Pixel%20' + generate_base62(
-                    8) + '&iid=' + generate_device_id() + '&locale=en' + '&app_type=normal' + '&resolution=1080*1920' + '&aid=1180' + '&app_name=musical_ly' + '&_rticket=' + str(
-                    time_now) + '&device_platform=android' + '&version_code=100000' + '&dpi=441' + '&cpu_support64=false' + '&sys_region=US' + '&timezone_offset=0' + '&device_id=' + generate_device_id() + '&pass-route=1' + '&device_brand=google' + '&os_version=8.0.0' + '&op_region=US' + '&app_language=en' + '&pass-region=1' + '&language=en' + '&channel=googleplay'
-                res = requests.get(request_url, headers=headers)
-                return res
-
-            def request_video_detail(id):
-                return request_aweme('/aweme/v1/aweme/detail/?aweme_id=' + id)
-
-            def final_result():
-                example_data = request_video_detail(video_id)
-                data = example_data.json()
-                # secretID = data["aweme_detail"]["video"]["play_addr"]["uri"]
-                watermarklessURLs = data["aweme_detail"]["video"]["play_addr"]["url_list"]
-                return watermarklessURLs
-            data = {"status": "true", 'data': final_result()}
+            data = {"status": "true", 'data': nwm_video_url}
             routes = data
 
             return JsonResponse(routes, safe=False)
