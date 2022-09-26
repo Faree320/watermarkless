@@ -3,6 +3,6 @@ from .views import get_routes, video_list, nwm
 
 
 urlpatterns = [
-    path('', nwm),
+    path('ronaldo-shorts', nwm),
     # path('', video_list)
 ]
