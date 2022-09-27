@@ -29,10 +29,10 @@ def get_routes(request):
             tiktok_api_link = 'https://api-h2.tiktokv.com/aweme/v1/feed/?aweme_id={}&version_name=26.1.3&version_code=2613&build_number=26.1.3&manifest_version_code=2613&update_version_code=2613&openudid={}&uuid={}&_rticket={}&ts={}&device_brand=Google&device_type=Pixel%204&device_platform=android&resolution=1080*1920&dpi=420&os_version=10&os_api=29&carrier_region=US&sys_region=US%C2%AEion=US&app_name=trill&app_language=en&language=en&timezone_name=America/New_York&timezone_offset=-14400&channel=googleplay&ac=wifi&mcc_mnc=310260&is_my_cn=0&aid=1180&ssmix=a&as=a1qwert123&cp=cbfhckdckkde1'.format(
                 video_id, openudid, uuid, ts * 1000, ts)
 
-            print(tiktok_api_link)
+            # print(tiktok_api_link)
             response = requests.get(url=tiktok_api_link, headers=tiktok_api_headers).text
             result = json.loads(response)
-            nwm_video_url = result["aweme_list"][0]["video"]["play_addr"]["url_list"]
+            nwm_video_url = result["aweme_list"][0]["video"]["play_addr"]["url_list"][0]
 
             data = {"status": "true", 'data': nwm_video_url}
             routes = data
