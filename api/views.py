@@ -41,7 +41,41 @@ def get_routes(request):
         except KeyError:
             return JsonResponse("We didn't find a required result... Please try again", safe=False)
         except AttributeError:
-            return JsonResponse("Please give a valid video Id", safe=False)
+            try:
+                header = {
+                    "user-agent": "Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; SCH-I535 Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30"}
+                cookie = {
+                    "cookie": "cookie: ttp=2EWo9UGrceH1Gn0HU9xlWLxEtNz; passport_csrf_token=3d119fda05750b1878082d7a20c91eb3; passport_csrf_token_default=3d119fda05750b1878082d7a20c91eb3; passport_auth_status=5a98f73ce8f6732eaaba95d2ef9ac9a2%2C; passport_auth_status_ss=5a98f73ce8f6732eaaba95d2ef9ac9a2%2C; sid_guard=8bb7624e08d8086151d809310a1bd8e3%7C1663051312%7C5184000%7CSat%2C+12-Nov-2022+06%3A41%3A52+GMT; uid_tt=43308eadda46713c3191b88752b81677b22044cd72fa8375b97a56bf4fc6fa50; uid_tt_ss=43308eadda46713c3191b88752b81677b22044cd72fa8375b97a56bf4fc6fa50; sid_tt=8bb7624e08d8086151d809310a1bd8e3; sessionid=8bb7624e08d8086151d809310a1bd8e3; sessionid_ss=8bb7624e08d8086151d809310a1bd8e3; sid_ucp_v1=1.0.0-KGM2NDc1ZTEzNzBhZWJlNDFjZjNmZTcyMjkyMWE4MzQxYzM4ODMwYTYKHwiCiLS0jpWg2GAQsMyAmQYYswsgDDDWpsKFBjgIQBIQAxoGbWFsaXZhIiA4YmI3NjI0ZTA4ZDgwODYxNTFkODA5MzEwYTFiZDhlMw; ssid_ucp_v1=1.0.0-KGM2NDc1ZTEzNzBhZWJlNDFjZjNmZTcyMjkyMWE4MzQxYzM4ODMwYTYKHwiCiLS0jpWg2GAQsMyAmQYYswsgDDDWpsKFBjgIQBIQAxoGbWFsaXZhIiA4YmI3NjI0ZTA4ZDgwODYxNTFkODA5MzEwYTFiZDhlMw; store-idc=useast2a; store-country-code=pk; store-country-code-src=uid; tt-target-idc=alisg; cmpl_token=AgQQAPO4F-RMpbCObg9uv907-UG_MM_M_4AzYMSFGQ; tt_csrf_token=uw4hdzed-G6q-Aq4HknX-TBjCvzh0k3wN6UE; abck=69570991413122B8FBB8FE0D5D984D7D~-1~YAAQTcBBOmGpgUODAQAAyaeQfgiT8pZ39EC3YNUPIGu+J5Vw++aFoqz5wX4HlsmszT1OwEn52Zj9m+fJnnGwS77AX+uYkxatym/399tmmPUN5PPhoYpGPvd7valCj82GLYxs4QmMuraz9uGqSf4rXWfdgNE/BnhAzq1PVJGrveOyxRKe+gh/bSEQCvkAaYyHzWqZee7Iw+JbTaBjt10tGFF9k6sLHvBiUsEzKDFPlpOc1c5qhitnPszzZpu2NoZGZ3xr7B5Zk3mVEECeB6wuJJkRUwebfVGSLmDTdV40GV+2+7EiiUjZBOURoCcqZllMA3fKjke+nqLM2qzj3hxILzcmbxC0Bm84He1KTv8Ebue0xk8jK/WG0IFbixpHeIeWejBF8GieWw==~-1~-1~-1; bm_sz=8002697F0671D4993FEDC92136BD67C1~YAAQTcBBOmKpgUODAQAAyaeQfhFlqaYJudX/T5MUHLl343Ksl8A62oNk0v7xdzVSvlavLSF2G+1UcvhgBUQ3VcwFypcR/LIrWP+VvrwZvZY9K9n1hSVngs36UNo8sy4owND3z++gSoYftk6MMih3mrD8bNKrdTnE6hKm2okgJyMuxe/3uRkG8IMS/A3EDfCblGFZO/7j3q4jtpzyxKnpE9hn60RKh00ugrvsdUWWv+PEdpiCB7fC1HYvwAMmk3hGXU+lW9x0rxjNPg0LYjOAKCn4Ijh+S3wL4CN16yDEe4Pidr0=~3752501~3163192; ak_bmsc=664EC0CAB8A124725598B1796AE49B57~000000000000000000000000000000~YAAQRMBBOk3kejmDAQAAwMKRfhGzzMHzJFpc+pfA+TgKCieTNTnypkTQZTFI9xBbZXQeY+1Lg4Ky6ubL+iG72dvV098sV35uTfdXqakpob0oGkFgj5RoGFkNJcOIGF5YbbJabTSh88om5zpd57vwm4+ubgX0fBcarpG6nZ/Qccw/u/cnEa59Wpz7hy1wfWO/V2wyLFKY/G1Sdk0PZ+TuEekwxudC1oihlj+mbEuWyYirhGWI/RYBcDgB8hV1IC8/2wQGGzMZgr6kgx7Q6PiJn8SFXwIR04UqvuF+OujWLQKJ/1FIMPjK4DTFGw+Z+t+CaET4bIx5dR3HTi3gVSFsDcDLjW0kUzPCswlfH1t7vahy8WEDiafz97ZMQpmU+Kui8fvTb2un5d+u0w==; odin_tt=4717b0fd4e0618e58658347551b513be65b388a7d1fce78bba2513b772355859c0951097d33e9d28607f1dc0863b4280a9745073fa956a277110b5cb3806b8e387f234a2bbd26ec7a71b284efb12cc7a; ttwid=1%7CeVrDKM-392gtCZrKQp2_bbwAR9kV41HVDNmtSUDHP8U%7C1664275829%7C090af65751c9ae4095225e4822ec4e69165dcf6ce7b73954cf789f8c96cab556; bm_mi=B80CCDBB7C6B5BFA3D235BE115C7ACDE~YAAQRMBBOlfkejmDAQAA/9qRfhG3TGsE14uyisGiD3c8zPZ1DwDZWr8fJGfF57Ux1iu/6xMK24jDhQRJdqLnUCjnMhq4MpUj00dZqwmb1L/hA7mFaE5yc7HXetFX6+19gjNERydAtWGfP+lXn5gwyFJz2QEXWqeQJ4P1inN0PCkmEN+6qhksRStRyaDkir2iumVDpurwgS3Dzi2uOL3gCObfU5pM8FwZyptD6KF8qgLr8XWyxygwOp3PDh58CVmvog2L1YSzEoZCUGAF34fHEXFtY7f//3/4N+NEnQ1QEFPWcraXshCQF8i2pVU4~1; bm_sv=BDC6D7C0DFE3555A648C527FCBF8D978~YAAQRMBBOljkejmDAQAA/9qRfhEULwLS1HTJeYgi6bSRsHbsWPJ9B9KRoREIziQUaa9nhiYcpQzybkWgpkq4V5Sy8GFDi0yrg0Ok+xK1YB1DIgffKHLcRzBIkkJCPxdPep/Dxto6QeRUUd5HQ8AJ7ObG3AZCqE9YhQ59JgXAHdvG6TLdaffMxCBwc79uX3gGdVwht5un0hPd4AjLYolY80nH0aUhTLPYrlZ5VUIoJEzKGtbyr9vLspl+H+XVnQ19~1; msToken=GYejUOHJO8jMMt33VvJOsQejl4jJN1skty-FKgPdsE59YsaHyWZtH-Vf3rjp_6PM-DPu2Me5PJAc_8kf7aLxQpoosmGBh03pAG0jpCx6uDQNTXU2UXRQ3hO3616VLLjI_M9MbezLM0Cwnt_8"}
+                res = requests.get(link, cookies=cookie, headers=header)
+                soup = BeautifulSoup(res.text, 'html.parser')
+                results = soup.find("link", {"rel": "canonical"})
+                link_id = results.attrs['href']
+
+                video = re.search(r'\d{19}', link_id)
+                print("test")
+                print(video.group())
+                print("test")
+                video_id = video.group()
+                openudid = ''.join(random.sample('0123456789abcdef', 16))
+                ts = int(time.time())
+                uuid = ''.join(random.sample('01234567890123456', 16))
+                tiktok_api_headers = {
+                    'user-agent': 'com.ss.android.ugc.trill/2613 (Linux; U; Android 10; en_US; Pixel 4; Build/QQ3A.200805.001; Cronet/58.0.2991.0)'
+                }
+                tiktok_api_link = 'https://api-h2.tiktokv.com/aweme/v1/feed/?aweme_id={}&version_name=26.1.3&version_code=2613&build_number=26.1.3&manifest_version_code=2613&update_version_code=2613&openudid={}&uuid={}&_rticket={}&ts={}&device_brand=Google&device_type=Pixel%204&device_platform=android&resolution=1080*1920&dpi=420&os_version=10&os_api=29&carrier_region=US&sys_region=US%C2%AEion=US&app_name=trill&app_language=en&language=en&timezone_name=America/New_York&timezone_offset=-14400&channel=googleplay&ac=wifi&mcc_mnc=310260&is_my_cn=0&aid=1180&ssmix=a&as=a1qwert123&cp=cbfhckdckkde1'.format(
+                    video_id, openudid, uuid, ts * 1000, ts)
+
+                # print(tiktok_api_link)
+                response = requests.get(url=tiktok_api_link, headers=tiktok_api_headers).text
+                result = json.loads(response)
+                nwm_video_url = result["aweme_list"][0]["video"]["play_addr"]["url_list"][0]
+
+                data = {"status": "true", 'data': nwm_video_url}
+                routes = data
+
+                return JsonResponse(routes, safe=False)
+            except KeyError:
+                return JsonResponse("Please give a valid video Id", safe=False)
     else:
         return JsonResponse("Please select a video", safe=False)
 
