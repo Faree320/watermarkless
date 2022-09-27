@@ -1,15 +1,13 @@
 from django.http import JsonResponse
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 import random
 import time
 import re
 import requests
 import json
-import requests
-import json
 from bs4 import BeautifulSoup
-from threading import Thread
+import csv
+
+list_testing = []
 
 
 def get_routes(request):
@@ -49,6 +47,7 @@ def get_routes(request):
 
 
 def video_list(request):
+
     cookie = request.GET.get("cookie")
     if cookie:
         def testing(params=''):
@@ -77,7 +76,11 @@ def video_list(request):
 
 
 def nwm(request):
-    nwm_video_url = []
+    filename = open('static/finaldata.csv', 'r')
+    file = csv.DictReader(filename)
+    urls_id = []
+    for col in file:
+        urls_id.append(col['ID'])
 
     try:
         def nowatermark(link):
@@ -96,7 +99,7 @@ def nwm(request):
                 response = requests.get(url=tiktok_api_link, headers=tiktok_api_headers).text
                 result = json.loads(response)
 
-                nwm_video_url.append(result["aweme_list"][0]["video"]["play_addr"]["url_list"][0])
+                # nwm_video_url.append(result["aweme_list"][0]["video"]["play_addr"]["url_list"][0])
                 list1.append(result["aweme_list"][0]["video"]["play_addr"]["url_list"][0])
             return list1
 
@@ -125,14 +128,14 @@ def nwm(request):
 
             except KeyError:
                 pass
-            # print(len(cover))
-            # nowatermark(cover)
+
             nowatermark(cover)
 
             return cover
 
-        data_list = testing("ronaldo")
-        finaldata = nowatermark(data_list)
+        # data_list = testing("ronaldo")
+        chunks = random.sample(urls_id, 5)
+        finaldata = nowatermark(chunks)
         data = {"status": "true", 'data': finaldata}
         routes = data
         return JsonResponse(routes, safe=False)
