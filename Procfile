@@ -1,0 +1,1 @@
+web: gunicorn offline_tiktok.wsgi --log-file=-
