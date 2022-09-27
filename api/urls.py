@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import get_routes, video_list, nwm
+from .views import nwm
 
 
 urlpatterns = [
