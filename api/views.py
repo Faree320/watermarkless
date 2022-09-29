@@ -155,7 +155,7 @@ def nwm(request):
                     links_arr = length[i]['video']['playAddr']
                     link_id_arr = length[i]['id']
                     if "https://v16-webapp.tiktok.com" in links_arr:
-                        if len(cover) < 5:
+                        if len(cover) < 10:
                             cover.append(link_id_arr)
                         else:
                             break
@@ -168,7 +168,7 @@ def nwm(request):
             return cover
 
         # data_list = testing("ronaldo")
-        chunks = random.sample(urls_id, 5)
+        chunks = random.sample(urls_id, 10)
         finaldata = nowatermark(chunks)
         data = {"status": "true", 'data': finaldata}
         routes = data
